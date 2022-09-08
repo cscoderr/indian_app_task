@@ -1,4 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:indian_app/core/core.dart';
+import 'package:indian_app/feature/chat/chat.dart';
+import 'package:indian_app/feature/gift/gift.dart';
+import 'package:indian_app/feature/home/home.dart';
+import 'package:indian_app/feature/profile/profile.dart';
+import 'package:indian_app/feature/transaction/transaction.dart';
 
 import '../models/model.dart';
 
@@ -28,4 +34,12 @@ final bottomTabItems = <TabItems>[
     icon: AppImages.profile,
     activeIcon: AppImages.profileFill,
   ),
+];
+
+final bottomTabPages = <Widget>[
+  const HomePage(),
+  const GiftPage(),
+  const TransactionPage(),
+  const ChatPage(),
+  const ProfilePage(),
 ];
