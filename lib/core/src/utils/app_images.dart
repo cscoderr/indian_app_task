@@ -1,4 +1,6 @@
 class AppImages {
+  AppImages._();
+
   static const String logo = 'assets/images/logo.png';
   static const String homeFill = 'assets/images/home_fill.png';
   static const String home = 'assets/images/home.png';
@@ -10,4 +12,31 @@ class AppImages {
   static const String chat = 'assets/images/chat.png';
   static const String profileFill = 'assets/images/profile_fill.png';
   static const String profile = 'assets/images/profile.png';
+  static const String notification = 'assets/images/notification.png';
+  static const String menu = 'assets/images/menu.png';
+  static const String banner = 'assets/images/banner.png';
+  static const String banner1 = 'assets/images/banner1.png';
+  static const String banner2 = 'assets/images/banner2.png';
+  static const String banner3 = 'assets/images/banner3.png';
+  static const String banner4 = 'assets/images/banner4.png';
+  static const String hotSlider1 = 'assets/images/hot_slider1.png';
+  static const String hotSlider2 = 'assets/images/hot_slider2.png';
+  static const String hotSlider3 = 'assets/images/hot_slider3.png';
+  static const String hotSlider4 = 'assets/images/hot_slider4.png';
+  static const String hotSlider5 = 'assets/images/hot_slider5.png';
+  static const String used = 'assets/images/used.png';
+  static const String usedFill = 'assets/images/used_fill.png';
+  static const String live = 'assets/images/live.png';
+  static const String liveFill = 'assets/images/live_fill.png';
+  static const String sport = 'assets/images/sport.png';
+  static const String sportFill = 'assets/images/sport_fill.png';
+  static const String lottery = 'assets/images/lottery.png';
+  static const String lotteryFill = 'assets/images/lottery_fill.png';
+  static const String poker = 'assets/images/poker.png';
+  static const String pokerFill = 'assets/images/poker_fill.png';
+  static const String game = 'assets/images/game.png';
+  static const String gameFill = 'assets/images/game_fill.png';
+  static const String speaker = 'assets/images/speaker.png';
+  static const String crown = 'assets/images/vip.png';
+  static const String wallet = 'assets/images/wallet.png';
 }

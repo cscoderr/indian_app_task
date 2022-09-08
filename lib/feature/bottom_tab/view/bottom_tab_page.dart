@@ -17,9 +17,7 @@ class _BottomTabPageState extends State<BottomTabPage> {
         valueListenable: currentBottomTabIndex,
         builder: (context, _, __) {
           return Scaffold(
-            body: SafeArea(
-              child: bottomTabPages[currentBottomTabIndex.value],
-            ),
+            body: bottomTabPages[currentBottomTabIndex.value],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: currentBottomTabIndex.value,
               onTap: (index) {

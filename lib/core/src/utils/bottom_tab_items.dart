@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:indian_app/core/core.dart';
-import 'package:indian_app/feature/chat/chat.dart';
-import 'package:indian_app/feature/gift/gift.dart';
-import 'package:indian_app/feature/home/home.dart';
-import 'package:indian_app/feature/profile/profile.dart';
-import 'package:indian_app/feature/transaction/transaction.dart';
 
-import '../models/model.dart';
+import '../../../feature/chat/chat.dart';
+import '../../../feature/gift/gift.dart';
+import '../../../feature/home/home.dart';
+import '../../../feature/profile/profile.dart';
+import '../../../feature/transaction/transaction.dart';
+import '../../core.dart';
 
 final bottomTabItems = <TabItems>[
   TabItems(
@@ -42,4 +41,12 @@ final bottomTabPages = <Widget>[
   const TransactionPage(),
   const ChatPage(),
   const ProfilePage(),
+];
+
+final hotGames = <HotGame>[
+  HotGame(image: AppImages.hotSlider5),
+  HotGame(image: AppImages.hotSlider4),
+  HotGame(image: AppImages.hotSlider3),
+  HotGame(image: AppImages.hotSlider2),
+  HotGame(image: AppImages.hotSlider1),
 ];
