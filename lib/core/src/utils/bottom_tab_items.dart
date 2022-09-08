@@ -19,7 +19,7 @@ final bottomTabItems = <TabItems>[
     activeIcon: AppImages.giftFill,
   ),
   TabItems(
-    title: 'Money',
+    title: 'Transaction',
     icon: AppImages.money,
     activeIcon: AppImages.moneyFill,
   ),

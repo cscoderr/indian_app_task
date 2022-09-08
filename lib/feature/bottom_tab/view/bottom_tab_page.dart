@@ -10,18 +10,81 @@ class BottomTabPage extends StatefulWidget {
 }
 
 class _BottomTabPageState extends State<BottomTabPage> {
-  final currentBottomTabIndex = ValueNotifier<int>(0);
+  int currentBottomTabIndex = 0;
+  PageController pageController = PageController();
+
+  void onPageChanged(int page) {
+    pageController.jumpToPage(page);
+
+    setState(() {
+      currentBottomTabIndex = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: currentBottomTabIndex,
-        builder: (context, _, __) {
-          return Scaffold(
-            body: bottomTabPages[currentBottomTabIndex.value],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: currentBottomTabIndex.value,
+    return Scaffold(
+      appBar: (context.screenWidth > kMobileBreakpoint)
+          ? null
+          : const CustomAppBar(),
+      body: Row(
+        children: [
+          if (context.screenWidth > kMobileBreakpoint)
+            NavigationRail(
+              onDestinationSelected: onPageChanged,
+              backgroundColor: AppColor.backgroundColor,
+              extended: true,
+              leading: const DrawerHeader(
+                child: Text(
+                  'Main Menu',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              destinations: bottomTabItems
+                  .asMap()
+                  .entries
+                  .map(
+                    (e) => NavigationRailDestination(
+                      icon: currentBottomTabIndex == e.key
+                          ? Image.asset(e.value.activeIcon)
+                          : Image.asset(e.value.icon),
+                      label: Text(
+                        e.value.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              selectedIndex: currentBottomTabIndex,
+              selectedIconTheme: const IconThemeData(color: AppColor.primary),
+              useIndicator: false,
+            ),
+          if (context.screenWidth > kMobileBreakpoint)
+            const VerticalDivider(thickness: 1, width: 1),
+          Expanded(
+            child: PageView(
+              controller: pageController,
+              onPageChanged: (value) {
+                setState(() {
+                  currentBottomTabIndex = value;
+                });
+              },
+              children: bottomTabPages.map((e) => e).toList(),
+            ),
+          )
+        ],
+      ),
+      bottomNavigationBar: context.screenWidth > kMobileBreakpoint
+          ? null
+          : BottomNavigationBar(
               onTap: (index) {
-                currentBottomTabIndex.value = index;
+                setState(() {
+                  currentBottomTabIndex = index;
+                });
               },
               unselectedIconTheme: Theme.of(context).iconTheme.copyWith(
                     color: Colors.red,
@@ -34,14 +97,13 @@ class _BottomTabPageState extends State<BottomTabPage> {
                   .entries
                   .map(
                     (e) => BottomNavigationBarItem(
-                        icon: currentBottomTabIndex.value == e.key
+                        icon: currentBottomTabIndex == e.key
                             ? Image.asset(e.value.activeIcon)
                             : Image.asset(e.value.icon),
                         label: ''),
                   )
                   .toList(),
             ),
-          );
-        });
+    );
   }
 }

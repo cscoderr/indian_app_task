@@ -25,34 +25,63 @@ class _CategoryTabBarState extends State<CategoryTabBar> {
       return DefaultTabController(
         length: categories.length,
         initialIndex: categories.indexOf(currentCategory),
-        child: Column(
-          children: categories
-              .map(
-                (e) => Column(
-                  children: [
-                    CategoryCard(
-                      onTap: () {
-                        setCurrentCategory(e);
-                        DefaultTabController.of(context)?.animateTo(
-                          categories.indexOf(currentCategory),
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                        );
-                      },
-                      image: currentCategory.title == e.title
-                          ? e.activeImage
-                          : e.image,
-                    ).animate().scale(
-                        duration: (200 +
-                                (categories.indexOf(currentCategory)) *
-                                    categories.indexOf(currentCategory))
-                            .ms),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+        child: context.screenWidth > kMobileBreakpoint
+            ? Row(
+                children: categories
+                    .map(
+                      (e) => Row(
+                        children: [
+                          CategoryCard(
+                            onTap: () {
+                              setCurrentCategory(e);
+                              DefaultTabController.of(context)?.animateTo(
+                                categories.indexOf(currentCategory),
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                              );
+                            },
+                            image: currentCategory.title == e.title
+                                ? e.activeImage
+                                : e.image,
+                          ).animate().scale(
+                              duration: (200 +
+                                      (categories.indexOf(currentCategory)) *
+                                          categories.indexOf(currentCategory))
+                                  .ms),
+                          const SizedBox(width: 20),
+                        ],
+                      ),
+                    )
+                    .toList(),
               )
-              .toList(),
-        ),
+            : Column(
+                children: categories
+                    .map(
+                      (e) => Column(
+                        children: [
+                          CategoryCard(
+                            onTap: () {
+                              setCurrentCategory(e);
+                              DefaultTabController.of(context)?.animateTo(
+                                categories.indexOf(currentCategory),
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                              );
+                            },
+                            image: currentCategory.title == e.title
+                                ? e.activeImage
+                                : e.image,
+                          ).animate().scale(
+                              duration: (200 +
+                                      (categories.indexOf(currentCategory)) *
+                                          categories.indexOf(currentCategory))
+                                  .ms),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
       );
     });
   }
