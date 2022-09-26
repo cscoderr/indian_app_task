@@ -4,7 +4,12 @@ import 'package:indian_app/core/core.dart';
 import 'package:indian_app/feature/home/home.dart';
 
 class CategoryTabBar extends StatefulWidget {
-  const CategoryTabBar({super.key});
+  const CategoryTabBar({
+    super.key,
+    required this.tabChange,
+  });
+
+  final ValueChanged<int> tabChange;
 
   @override
   State<CategoryTabBar> createState() => _CategoryTabBarState();
@@ -54,33 +59,30 @@ class _CategoryTabBarState extends State<CategoryTabBar> {
                     )
                     .toList(),
               )
-            : Column(
-                children: categories
-                    .map(
-                      (e) => Column(
-                        children: [
-                          CategoryCard(
-                            onTap: () {
-                              setCurrentCategory(e);
-                              DefaultTabController.of(context)?.animateTo(
-                                categories.indexOf(currentCategory),
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.fastLinearToSlowEaseIn,
-                              );
-                            },
-                            image: currentCategory.title == e.title
-                                ? e.activeImage
-                                : e.image,
-                          ).animate().scale(
-                              duration: (200 +
-                                      (categories.indexOf(currentCategory)) *
-                                          categories.indexOf(currentCategory))
-                                  .ms),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
-                    )
-                    .toList(),
+            : Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final e = categories[index];
+                    return CategoryCard(
+                      onTap: () {
+                        setCurrentCategory(e);
+                        widget.tabChange(index);
+                        DefaultTabController.of(context)?.animateTo(
+                          categories.indexOf(currentCategory),
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                        );
+                      },
+                      image: currentCategory.title == e.title
+                          ? e.activeImage
+                          : e.image,
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 20),
+                  itemCount: categories.length,
+                  shrinkWrap: true,
+                ),
               ),
       );
     });

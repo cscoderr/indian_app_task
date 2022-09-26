@@ -22,11 +22,92 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               height: 40,
             ),
             const Spacer(),
-            Image.asset(
-              AppImages.menu,
-              width: 30,
-              height: 30,
-            ),
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            AppImages.lang,
+                            height: 30,
+                            width: 30,
+                          ),
+                          const SizedBox(width: 10),
+                          const Text('हिंदी'),
+                        ],
+                      ),
+                      const Divider(),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        AppImages.facebook,
+                        height: 30,
+                        width: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text('Facebook'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        AppImages.instagram,
+                        height: 30,
+                        width: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text('Instagram'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        AppImages.youtube,
+                        height: 30,
+                        width: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text('Youtube'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        AppImages.telegram,
+                        height: 30,
+                        width: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text('Telegram'),
+                    ],
+                  ),
+                ),
+              ],
+              child: Image.asset(
+                AppImages.menu,
+                width: 30,
+                height: 30,
+              ),
+            )
           ],
         ),
       ),

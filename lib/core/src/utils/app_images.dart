@@ -39,4 +39,9 @@ class AppImages {
   static const String speaker = 'assets/images/speaker.png';
   static const String crown = 'assets/images/vip.png';
   static const String wallet = 'assets/images/wallet.png';
+  static const String facebook = 'assets/images/facebook.png';
+  static const String instagram = 'assets/images/instagram.png';
+  static const String youtube = 'assets/images/youtube.png';
+  static const String telegram = 'assets/images/telegram.png';
+  static const String lang = 'assets/images/lang.png';
 }

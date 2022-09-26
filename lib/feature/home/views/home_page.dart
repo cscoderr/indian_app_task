@@ -5,66 +5,153 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/core.dart';
 import '../home.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int currentCategoryTab = 0;
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (context.screenWidth > kMobileBreakpoint)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      AppImages.logo,
-                      height: 40,
-                    ),
-                    const Spacer(),
-                    Image.asset(
-                      AppImages.notification,
-                      width: 30,
-                      height: 30,
-                    ),
-                    const SizedBox(width: 20),
-                    Image.asset(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (context.screenWidth > kMobileBreakpoint)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Row(
+                children: [
+                  Image.asset(
+                    AppImages.logo,
+                    height: 40,
+                  ),
+                  const Spacer(),
+                  Image.asset(
+                    AppImages.notification,
+                    width: 30,
+                    height: 30,
+                  ),
+                  const SizedBox(width: 20),
+                  PopupMenuButton(
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(
+                                  AppImages.lang,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                const SizedBox(width: 10),
+                                const Text('हिंदी'),
+                              ],
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              AppImages.facebook,
+                              height: 30,
+                              width: 30,
+                            ),
+                            const SizedBox(width: 10),
+                            const Text('Facebook'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              AppImages.instagram,
+                              height: 30,
+                              width: 30,
+                            ),
+                            const SizedBox(width: 10),
+                            const Text('Instagram'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              AppImages.youtube,
+                              height: 30,
+                              width: 30,
+                            ),
+                            const SizedBox(width: 10),
+                            const Text('Youtube'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              AppImages.telegram,
+                              height: 30,
+                              width: 30,
+                            ),
+                            const SizedBox(width: 10),
+                            const Text('Telegram'),
+                          ],
+                        ),
+                      ),
+                    ],
+                    child: Image.asset(
                       AppImages.menu,
                       width: 30,
                       height: 30,
                     ),
-                  ],
-                ),
-              ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 200,
-              width: context.screenWidth,
-              child: Swiper(
-                scrollDirection: Axis.horizontal,
-                autoplay: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(),
-                    child: Image.asset(AppImages.banner, fit: BoxFit.cover),
-                  );
-                },
-                itemCount: 3,
-                control: const SwiperControl(),
+                  )
+                ],
               ),
             ),
-            const SizedBox(height: 20),
-            Padding(
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 200,
+            width: context.screenWidth,
+            child: Swiper(
+              scrollDirection: Axis.horizontal,
+              autoplay: true,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(),
+                  child: Image.asset(AppImages.banner, fit: BoxFit.cover),
+                );
+              },
+              itemCount: 3,
+              control: const SwiperControl(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: Padding(
               padding: (context.screenWidth > kMobileBreakpoint)
                   ? const EdgeInsets.symmetric(horizontal: 70)
                   : const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Hot Game',
@@ -73,7 +160,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   const HotGameListView(),
                   const SizedBox(height: 20),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   Row(
                     children: [
                       Row(
@@ -180,39 +267,39 @@ class HomePage extends StatelessWidget {
                   ).animate().scale(duration: 200.ms),
                   const SizedBox(height: 15),
                   if (context.screenWidth < kMobileBreakpoint)
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const CategoryTabBar(),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const BannerCard(
-                                image: AppImages.banner4,
-                                isMaintained: true,
-                              ).animate().fade(duration: 500.ms),
-                              const SizedBox(height: 20),
-                              const BannerCard(image: AppImages.banner1)
-                                  .animate()
-                                  .fade(duration: (500 + 20).ms),
-                              const SizedBox(height: 20),
-                              const BannerCard(image: AppImages.banner2)
-                                  .animate()
-                                  .fade(duration: (500 + 40).ms),
-                              const SizedBox(height: 20),
-                              const BannerCard(image: AppImages.banner4)
-                                  .animate()
-                                  .fade(duration: (500 + 60).ms),
-                            ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          CategoryTabBar(
+                            tabChange: (value) {
+                              setState(() {
+                                currentCategoryTab = value;
+                              });
+                            },
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 15),
+                          Expanded(
+                            flex: 3,
+                            child: IndexedStack(
+                              index: currentCategoryTab,
+                              children: categoryItems
+                                  .map((e) => CategoryItemListVew(items: e))
+                                  .toList(),
+                            ),
+                          )
+                        ],
+                      ),
                     )
                   else
                     Column(
                       children: [
-                        const CategoryTabBar(),
+                        CategoryTabBar(
+                          tabChange: (value) {
+                            setState(() {
+                              currentCategoryTab = value;
+                            });
+                          },
+                        ),
                         const SizedBox(height: 20),
                         SizedBox(
                           height: 120,
@@ -254,11 +341,12 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
+                  const SizedBox(height: 15),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

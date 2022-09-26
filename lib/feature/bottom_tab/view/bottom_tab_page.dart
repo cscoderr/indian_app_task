@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/core.dart';
+import '../widgets/app_bottom_navigation.dart';
 
 class BottomTabPage extends StatefulWidget {
   const BottomTabPage({super.key});
@@ -80,27 +81,17 @@ class _BottomTabPageState extends State<BottomTabPage> {
       ),
       bottomNavigationBar: context.screenWidth > kMobileBreakpoint
           ? null
-          : BottomNavigationBar(
-              onTap: (index) {
-                setState(() {
-                  currentBottomTabIndex = index;
-                });
-              },
-              unselectedIconTheme: Theme.of(context).iconTheme.copyWith(
-                    color: Colors.red,
-                  ),
-              selectedIconTheme: Theme.of(context).iconTheme.copyWith(
-                    color: Colors.red,
-                  ),
+          : AppBottomNavigation(
+              onTap: onPageChanged,
+              currentIndex: currentBottomTabIndex,
               items: bottomTabItems
                   .asMap()
                   .entries
                   .map(
-                    (e) => BottomNavigationBarItem(
-                        icon: currentBottomTabIndex == e.key
-                            ? Image.asset(e.value.activeIcon)
-                            : Image.asset(e.value.icon),
-                        label: ''),
+                    (e) => AppBottomNavigationItem(
+                      icon: e.value.icon,
+                      activeIcon: e.value.activeIcon,
+                    ),
                   )
                   .toList(),
             ),
